@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Agregar Pago</title>
+
+ <script type="module" src="lib/js/submitForm.js"></script>
+ <script type="module" src="lib/js/muestraError.js"></script>
+
+</head>
+
+<body>
+
+ <form onsubmit="submitForm('srv/pasatiempo-agrega.php', event)
+    .then(modelo => location.href = 'index.html')
+    .catch(muestraError)">
+
+  <h1>Agregar Pago</h1>
+
+  <p><a href="index.html">Cancelar</a></p>
+
+  <!-- Nuevo campo para el total del pago -->
+  <p>
+   <label>
+    Total del Pago *
+    <input name="total" type="number" step="0.01" required>
+   </label>
+  </p>
+
+  <!-- Nuevo campo para la fecha del pago -->
+  <p>
+   <label>
+    Fecha del Pago *
+    <input name="fecha" type="date" required>
+   </label>
+  </p>
+
+  <!-- Nuevo campo para la autorización del pago -->
+  <p>
+   <label>
+    Autorización *
+    <input name="autorizacion" required>
+   </label>
+  </p>
+
+  <p>* Obligatorio</p>
+
+  <p><button type="submit">Agregar</button></p>
+
+ </form>
+
+</body>
+
+</html>

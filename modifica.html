@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Modificar Pago</title>
+
+ <script type="module" src="lib/js/consumeJson.js"></script>
+ <script type="module" src="lib/js/submitForm.js"></script>
+ <script type="module" src="lib/js/muestraObjeto.js"></script>
+ <script type="module" src="lib/js/muestraError.js"></script>
+
+ <script>
+  // Obtiene los parámetros de la página.
+  const params = new URL(location.href).searchParams;
+ </script>
+
+</head>
+
+<body onload="if (params.size > 0) {
+   consumeJson('srv/pasatiempo.php?' + params)
+    .then(respuesta => muestraObjeto(forma, respuesta.body))
+    .catch(muestraError)
+  }">
+
+ <form id="forma" onsubmit="submitForm('srv/pasatiempo-modifica.php', event)
+    .then(respuesta => location.href = 'index.html')
+    .catch(muestraError)">
+
+  <h1>Modificar Pago</h1>
+
+  <p><a href="index.html">Cancelar</a></p>
+
+  <!-- Campo oculto para el ID del pago -->
+  <input name="id" type="hidden">
+
+  <!-- Campo para modificar el total del pago -->
+  <p>
+   <label>
+    Total del Pago *
+    <input name="total" type="number" step="0.01" value="Cargando&hellip;">
+   </label>
+  </p>
+
+  <!-- Campo para modificar la fecha del pago -->
+  <p>
+   <label>
+    Fecha del Pago *
+    <input name="fecha" type="date" value="Cargando&hellip;">
+   </label>
+  </p>
+
+  <!-- Campo para modificar la autorización del pago -->
+  <p>
+   <label>
+    Autorización *
+    <input name="autorizacion" value="Cargando&hellip;">
+   </label>
+  </p>
+
+  <p>* Obligatorio</p>
+
+  <p>
+   <button type="submit">Guardar</button>
+
+   <!-- Botón para eliminar el registro -->
+   <button type="button" onclick="
+     if (params.size > 0 && confirm('Confirma la eliminación')) {
+      consumeJson('srv/pasatiempo-elimina.php?' + params)
+       .then(() => location.href = 'index.html')
+       .catch(muestraError)
+     }">
+    Eliminar
+   </button>
+  </p>
+
+ </form>
+
+</body>
+
+</html>

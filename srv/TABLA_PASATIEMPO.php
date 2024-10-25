@@ -1,0 +1,7 @@
+<?php
+
+const PAGOS = "PAGOS";
+const PAG_ID = "PAG_ID";
+const PAG_TOTAL = "PAG_TOTAL";
+const PAG_FECHA = "PAG_FECHA";
+const PAG_AUTORIZACION = "PAG_AUTORIZACION";
